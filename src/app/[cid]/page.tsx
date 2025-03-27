@@ -90,9 +90,10 @@ export type Certificate = (typeof data)[number];
 export async function generateMetadata({
   params,
 }: {
-  params: { cid: string };
+  params: Promise<{ cid: string }>;
 }): Promise<Metadata> {
-  const cid = parseInt(params.cid);
+  const { cid: un_parsed_cid } = await params;
+  const cid = parseInt(un_parsed_cid);
   const c = data.filter((d) => d.id === cid).findLast((c) => c);
 
   if (!c) return {};
