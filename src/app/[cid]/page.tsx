@@ -97,46 +97,46 @@ export default async function Page({
   if (!c) notFound();
 
   return (
-    <div className="flex flex-col gap-4 w-full items-center h-svh py-16">
-      <p className="text-xl animate-blur text-muted-foreground mb-2">
+    <div className="flex flex-col gap-4 w-full items-center min-h-screen py-8 px-4 sm:py-16">
+      <p className="text-base sm:text-xl text-center animate-blur text-muted-foreground mb-2">
         This is to certify that
       </p>
       <Image
         src={c.participant.profilePic}
-        height={120}
-        width={120}
-        className="rounded-full animate-blur delay-75 border-border border-4"
+        height={100}
+        width={100}
+        className="rounded-full animate-blur delay-75 border-border border-4 sm:h-[120px] sm:w-[120px]"
         alt={`${c.participant}'s Profile Picture`}
       />
-      <div>
-        <p className="text-2xl animate-blur delay-75 text-center">
+      <div className="text-center">
+        <p className="text-xl sm:text-2xl animate-blur delay-75">
           <b>{c.participant.name}</b>
         </p>
-        <p className="text-muted-foreground animate-blur delay-75 text-center">
+        <p className="text-sm sm:text-base text-muted-foreground animate-blur delay-75">
           {c.participant.email}
         </p>
       </div>
-      <p className="text-lg italic text-foreground/60 animate-blur delay-100 mb-3">
+      <p className="text-base sm:text-lg italic text-foreground/60 animate-blur delay-100 mb-3 text-center">
         has successfully completed the
       </p>
 
-      <h1 className="text-4xl animate-blur delay-150  font-bold text-center break-words w-1/3 bg-linear-90 from-foreground to-foreground/40 bg-clip-text text-transparent">
+      <h1 className="text-2xl sm:text-4xl animate-blur delay-150 font-bold text-center break-words w-full sm:w-2/3 md:w-1/2 bg-linear-90 from-foreground to-foreground/40 bg-clip-text text-transparent px-4">
         {c.name}
       </h1>
 
-      <p className="text-xl text-foreground/80 animate-blur delay-200 font-mono mb-2">
+      <p className="text-base sm:text-xl text-foreground/80 animate-blur delay-200 font-mono mb-2 text-center px-4">
         " with outstanding performance and dedication "
       </p>
-      <div className="text-sm animate-blur delay-250 text-muted-foreground/50 italic">
+      <div className="text-xs sm:text-sm animate-blur delay-250 text-muted-foreground/50 italic text-center">
         Issued on: {new Date().toLocaleDateString()}
       </div>
 
       <Image
         src={"/seal.png"}
         alt="Company Seal"
-        height={90}
-        width={90}
-        className="invert opacity-70 animate-blur delay-300"
+        height={70}
+        width={70}
+        className="invert opacity-70 animate-blur delay-300 sm:h-[90px] sm:w-[90px]"
       />
     </div>
   );
