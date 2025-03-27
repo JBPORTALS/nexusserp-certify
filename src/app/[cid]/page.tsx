@@ -163,7 +163,7 @@ export default async function Page({
       </h1>
 
       <p className="text-base sm:text-xl text-foreground/80 animate-blur delay-200 font-mono mb-2 text-center px-4">
-        " with outstanding performance and dedication "
+        {`" with outstanding performance and dedication "`}
       </p>
       <div className="text-xs sm:text-sm animate-blur delay-250 text-muted-foreground/50 italic text-center">
         Issued on: {new Date().toLocaleDateString()}
