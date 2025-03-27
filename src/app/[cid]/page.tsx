@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -86,6 +87,43 @@ const data = [
 
 export type Certificate = (typeof data)[number];
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { cid: string };
+}): Promise<Metadata> {
+  const cid = parseInt(params.cid);
+  const c = data.filter((d) => d.id === cid).findLast((c) => c);
+
+  if (!c) return {};
+
+  return {
+    title: `Certificate: ${c.name} - ${c.participant.name}`,
+    description: `Certification of achievement for ${c.participant.name} in ${c.name}`,
+    openGraph: {
+      title: `${c.participant.name} - ${c.name} Certificate`,
+      description: `Certified achievement in ${c.name}`,
+      images: [
+        {
+          url: c.participant.profilePic,
+          width: 400,
+          height: 400,
+          alt: `${c.participant.name}'s Profile Picture`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Certificate: ${c.name}`,
+      description: `Certification for ${c.participant.name}`,
+      images: [c.participant.profilePic],
+    },
+    alternates: {
+      canonical: `/certificate/${c.id}`,
+    },
+  };
+}
+
 export default async function Page({
   params,
 }: {
@@ -97,7 +135,7 @@ export default async function Page({
   if (!c) notFound();
 
   return (
-    <div className="flex flex-col gap-4 w-full items-center min-h-screen py-8 px-4 sm:py-16">
+    <main className="flex flex-col gap-4 w-full items-center min-h-screen py-8 px-4 sm:py-16">
       <p className="text-base sm:text-xl text-center animate-blur text-muted-foreground mb-2">
         This is to certify that
       </p>
@@ -138,6 +176,6 @@ export default async function Page({
         width={70}
         className="invert opacity-70 animate-blur delay-300 sm:h-[90px] sm:w-[90px]"
       />
-    </div>
+    </main>
   );
 }
