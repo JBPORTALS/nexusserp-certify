@@ -1,7 +1,9 @@
 import puppeteer from "puppeteer-core";
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "edge";
+export const config = {
+  runtime: "nodejs",
+};
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
