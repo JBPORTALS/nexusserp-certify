@@ -1,5 +1,0 @@
-{
-  "functions": {
-    "api/certificate-preview/route.ts": { "runtime": "nodejs18.x" }
-  }
-}
