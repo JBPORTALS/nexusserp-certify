@@ -1,5 +1,4 @@
 import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -9,14 +8,9 @@ export async function GET(req: NextRequest) {
   const regno = searchParams.get("regno");
   const pdfUrl = `https://api.nexusserp.com/api/certificates/generate_certificate.php?regno=${regno}`;
 
-  // Setup chromium
-  const executablePath = await chromium.executablePath();
-  console.log(executablePath);
   // Launch the browser
   const browser = await puppeteer.launch({
-    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-    defaultViewport: chromium.defaultViewport,
-    executablePath,
+    channel: "chrome",
     headless: true,
   });
 
