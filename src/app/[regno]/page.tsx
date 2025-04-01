@@ -37,18 +37,29 @@ export async function generateMetadata({
   const { regno } = await params;
   const c = await getCertificate(regno);
   console.log(c);
-  if (!c) return {};
+  if (!c) {
+    return {
+      title: "Certificate Not Found",
+      description: "The requested certificate could not be found.",
+      openGraph: {
+        title: "Certificate Not Found",
+        description: "This certificate might not exist or has been removed.",
+        url: `/certificate/${regno}`,
+      },
+    };
+  }
 
   const pronoun =
     c.participant.gender?.toUpperCase() === "MALE" ? "his" : "her";
-  const previewUrl = `/api/certificate-preview?regno=${regno}`;
+  const internshipDuration = `${c.start_date} to ${c.end_date}`;
+  const previewUrl = `/api/certificate-preview?regno=${c.regno}`;
 
   return {
     title: `${c.participant.name} - ${c.name} | JB PORTALS`,
-    description: `Official Internship Certificate for ${c.participant.name}, who successfully completed ${pronoun} internship at JB PORTALS.`,
+    description: `Official Internship Certificate for ${c.participant.name}, who successfully completed ${pronoun} internship as a ${c.participant.role} at JB PORTALS from ${internshipDuration}.`,
     openGraph: {
-      title: `${c.participant.name} - ${c.name}`,
-      description: `${c.participant.name} successfully completed ${pronoun} Internship at JB PORTALS.`,
+      title: `${c.participant.name} - ${c.name} | JB PORTALS`,
+      description: `${c.participant.name} successfully completed ${pronoun} Internship in ${c.participant.role} at JB PORTALS from ${internshipDuration}. View the official certificate.`,
       url: `/certificate/${c.regno}`,
       type: "article",
       images: [
@@ -63,7 +74,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: `${c.name} | ${c.participant.name}`,
-      description: `Internship Certificate for ${c.participant.name}. View the official certificate.`,
+      description: `${c.participant.name} has successfully completed ${pronoun} Internship as a ${c.participant.role} at JB PORTALS. View the official certificate.`,
       images: [previewUrl],
     },
     alternates: {
