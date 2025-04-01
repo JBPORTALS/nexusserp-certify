@@ -93,7 +93,7 @@ export default function Home() {
         `Successfully extracted ${regNos.length} registration numbers from column "${regNoColumn}"`
       );
     } catch (e) {
-      const error = e as any;
+      const error = e as Record<string, string>;
       setStatus(`Error reading Excel file: ${error.message}`);
       console.error(error);
     } finally {
@@ -158,7 +158,7 @@ export default function Home() {
 
       setStatus(`Successfully generated ${regNos.length} QR codes`);
     } catch (e) {
-      const error = e as any;
+      const error = e as Record<string, string>;
 
       setStatus(`Error: ${error.message}`);
       console.error(error);
