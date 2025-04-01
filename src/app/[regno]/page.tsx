@@ -65,8 +65,8 @@ export async function generateMetadata({
       images: [
         {
           url: previewUrl,
-          width: 1200,
-          height: 630,
+          width: 480,
+          height: 540,
           alt: "Internship Certificate Preview",
         },
       ],
