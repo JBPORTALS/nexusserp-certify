@@ -127,7 +127,7 @@ export default function Home() {
 
       // Generate QR code for each registration number
       for (const regNo of regNos) {
-        const url = `https://certify.beetopic.in/${regNo}`;
+        const url = `https://certify.beetopic.in/certificate/${regNo}`;
 
         // Generate QR code as data URL
         const qrDataUrl = await QRCode.toDataURL(url, {
