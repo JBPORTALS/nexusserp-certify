@@ -35,7 +35,8 @@ export default function Home() {
       const data = await excelFile.arrayBuffer();
       const workbook = XLSX.read(data);
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData: Record<any, any>[] = XLSX.utils.sheet_to_json(worksheet);
+      const jsonData: Record<string, string>[] =
+        XLSX.utils.sheet_to_json(worksheet);
 
       // Try to find a column that might contain registration numbers
       // First look for columns with common names, then fall back to first column
